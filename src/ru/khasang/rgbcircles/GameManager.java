@@ -3,11 +3,15 @@ package ru.khasang.rgbcircles;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
+import java.util.ArrayList;
+
 /**
  * Created by kiril on 18.12.2015.
  */
 public class GameManager {
+    public static final int MAX_CIRCLES = 10;
     private MainCircle mainCircle;
+    private ArrayList<EnemyCircle> circles;
     private CanvasView canvasView;
     private static int width;
     private static int height;
@@ -17,9 +21,20 @@ public class GameManager {
         width = w;
         height = h;
         initMainCircle();
+        initEnemyCircles();
+    }
+
+    private void initEnemyCircles() {
+        circles = new ArrayList<EnemyCircle>(); // Инициализируем память для коллекции.
+        for (int i=0; i < MAX_CIRCLES; i++){
+            EnemyCircle circle;
+            circle = EnemyCircle.getRandomCircle();
+            circles.add(circle);
+        }
     }
 
     public static int getWidth() {
+
         return width;
     }
 
@@ -29,14 +44,20 @@ public class GameManager {
 
 
     private void initMainCircle() {
+
         mainCircle = new MainCircle(width / 2, height / 2);
     }
 
     public void onDraw() {
+
         canvasView.drawCircle(mainCircle);
+        for (EnemyCircle circle: circles){    // Отрисовка вражеских кругов
+            canvasView.drawCircle(circle);
+        }
     }
 
     public void onTouchEvent(int x, int y) {
+
         mainCircle.moveMainCircleWhenTouchAt(x,y);
     }
 }
