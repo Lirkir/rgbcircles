@@ -5,7 +5,8 @@
               android:layout_height="fill_parent"
               android:background="#FFF"
 >
-    <ru.khasang.rgbcircles.CanvasView android:layout_width="match_parent" android:layout_height="match_parent"/>
+    <ru.khasang.rgbcircles.CanvasView android:layout_width="match_parent" android:layout_height="match_parent"
+                                      />
 
 </LinearLayout>
 
