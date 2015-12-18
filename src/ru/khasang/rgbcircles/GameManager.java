@@ -31,10 +31,16 @@ public class GameManager {
             circle = EnemyCircle.getRandomCircle();
             circles.add(circle);
         }
+        calculateAndSetCirclesColor();
+    }
+
+    private void calculateAndSetCirclesColor() {
+        for (EnemyCircle circle: circles) {
+            circle.setEnemyOrFoodColorDependsOn(mainCircle);
+        }
     }
 
     public static int getWidth() {
-
         return width;
     }
 
@@ -44,12 +50,10 @@ public class GameManager {
 
 
     private void initMainCircle() {
-
         mainCircle = new MainCircle(width / 2, height / 2);
     }
 
     public void onDraw() {
-
         canvasView.drawCircle(mainCircle);
         for (EnemyCircle circle: circles){    // Отрисовка вражеских кругов
             canvasView.drawCircle(circle);
@@ -57,7 +61,6 @@ public class GameManager {
     }
 
     public void onTouchEvent(int x, int y) {
-
         mainCircle.moveMainCircleWhenTouchAt(x,y);
     }
 }
